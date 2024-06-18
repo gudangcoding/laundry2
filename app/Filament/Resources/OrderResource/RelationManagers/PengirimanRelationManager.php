@@ -56,6 +56,7 @@ class PengirimanRelationManager extends RelationManager
                             'proses' => 'proses',
                             'kirim' => 'kirim',
                             'selesai' => 'selesai',
+                            'selesai' => 'selesai',
                         ];
                     })
                     ->getStateUsing(fn ($record) => $record->status),
