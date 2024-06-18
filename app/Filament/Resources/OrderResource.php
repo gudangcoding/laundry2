@@ -4,8 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers\OrderDetailRelationManager;
+use App\Filament\Resources\OrderResource\RelationManagers\PembayaranRelationManager;
+use App\Filament\Resources\OrderResource\RelationManagers\PengirimanRelationManager;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Pembayaran;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -90,11 +93,11 @@ class OrderResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Action::make('salesOrder')
-                ->button()
-                ->label('Print')
-                ->url(fn (Order $record): string => route('pdf.invoice', [
-                    'id' => $record->id
-                ]), shouldOpenInNewTab: true),
+                    ->button()
+                    ->label('Print')
+                    ->url(fn (Order $record): string => route('pdf.invoice', [
+                        'id' => $record->id
+                    ]), shouldOpenInNewTab: true),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -108,6 +111,8 @@ class OrderResource extends Resource
     {
         return [
             OrderDetailRelationManager::class,
+            PembayaranRelationManager::class,
+            PengirimanRelationManager::class,
         ];
     }
 
